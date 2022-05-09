@@ -1,50 +1,35 @@
-class MyArray {
-  constructor() {
-    this.length = 0;
-    this.data = {};
-  }
-
-  //most common array method, access
-  get(index) {
-    return this.data[index];
-  }
-
-  push(item) {
-    this.data[this.length] = item;
-    this.length++; //now MyArray has an extra length
-    return this.length;
-  }
-
-  pop() {
-    const lastItem = this.data[this.length - 1];
-    delete this.data[this.length - 1];
-    this.length--;
-    return lastItem;
-  }
-
-  delete(index) {
-    const item = this.data[index];
-    this.shiftItems(index);
-  }
-
-  shiftItems(index) {
-    for (let i = index; i < this.length - 1; i++) {
-      this.data[i] = this.data[i + 1];
-      //shifted items to the left by 1
-    }
-    delete this.data[this.length - 1];
-    this.length--;
-  }
+function reverse0(str) {
+  if (!str || str.length < 2) return str;
+  return str.split('').reverse().join('');
 }
 
-const newArr = new MyArray();
-newArr.push('hi');
-newArr.push('!');
-newArr.push('you');
-newArr.push('are');
-newArr.push('nice');
-console.log(newArr);
-newArr.delete(1);
-console.log(newArr);
-newArr.delete(0);
-console.log(newArr);
+function reverse1(str) {
+  if (!str || str.length < 2) return str;
+
+  let newStr = '';
+  for (let i = str.length - 1; i >= 0; i--) {
+    newStr += str[i];
+  }
+  return newStr;
+}
+
+function reverse2(str) {
+  if (!str || str.length < 2) return str;
+
+  const backwards = [];
+  for (let i = str.length - 1; i >= 0; i--) {
+    backwards.push(str[i]);
+  }
+
+  return backwards.join('');
+}
+
+//ES6++
+const reverse3 = (str) => str.split('').reverse().join('');
+const reverse4 = (str) => [...str].reverse().join('');
+
+console.log(reverse0('Hi, my name is Emme'), 'reverse0 fcn');
+console.log(reverse1('Hi, my name is Emme'), 'reverse1 fcn');
+console.log(reverse2('Hi, my name is Emme'), 'reverse2 fcn');
+console.log(reverse3('Hi, my name is Emme'), 'reverse3 fcn');
+console.log(reverse4('Hi, my name is Emme'), 'reverse4 fcn');
